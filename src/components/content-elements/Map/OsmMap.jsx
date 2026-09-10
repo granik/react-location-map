@@ -4,8 +4,10 @@ import * as providers from "pigeon-maps/providers";
 import "./osm-map.scss";
 
 const OsmMap = ({
+  centerOnSelected,
   defaultCenter,
   defaultZoom = 3,
+  doAlwaysCenterReset,
   expandedMarkerId,
   getMarkerCoords,
   getMarkerId,
@@ -35,6 +37,12 @@ const OsmMap = ({
           provider={provider}
           height={height}
           defaultCenter={defaultCenter}
+          center={
+            centerOnSelected
+              ? (getMarkerCoords(expandedMarker) ??
+                (doAlwaysCenterReset ? defaultCenter : undefined))
+              : undefined
+          }
           defaultZoom={defaultZoom}
           onClick={(e) => onMarkerClick(e, null)}
           metaWheelZoom={metaWheelZoom}

@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Map, List } from "@components/content-elements";
 
 const MapExplorer = ({
+  centerOnSelected = false,
   defaultCenter = [50.0, 8.0],
   defaultSelectedId = null,
   defaultZoom = 4,
+  doAlwaysCenterReset = false,
   getMarkerCoords,
   getMarkerId,
   listLabel = null,
@@ -41,8 +43,10 @@ const MapExplorer = ({
         .join(" ")}
     >
       <Map
+        centerOnSelected={centerOnSelected}
         defaultCenter={defaultCenter}
         defaultZoom={defaultZoom}
+        doAlwaysCenterReset={doAlwaysCenterReset}
         expandedMarkerId={selectedItemId}
         getMarkerCoords={(m) => (m !== null ? getMarkerCoords(m) : null)}
         getMarkerId={getMarkerId}

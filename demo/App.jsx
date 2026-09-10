@@ -11,8 +11,10 @@ function App() {
       title="Air Race in Austria"
       getMarkerId={(m) => m?.id}
       getMarkerCoords={(m) => m?.coordinates}
-      // height={500}
+      height={500}
+      centerOnSelected
       // wrapperExtraCssClass="custom"
+      // doAlwaysCenterReset
       // markerWidth={40}
       renderMarkerPopup={(m) => (
         <>
