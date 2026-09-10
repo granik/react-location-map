@@ -11,6 +11,7 @@ const MapExplorer = ({
   getMarkerId,
   listLabel = null,
   mapHeight = 400,
+  mapOnly = false,
   markers,
   markerWidth = 40,
   onItemClick,
@@ -59,15 +60,17 @@ const MapExplorer = ({
         renderMarkerPopup={renderMarkerPopup}
         title={title}
       />
-      <List
-        getMarkerId={getMarkerId}
-        highlightedItemId={selectedItemId}
-        items={markers}
-        onItemClick={handleClick}
-        onItemHover={handleHover}
-        renderListItem={renderListItem}
-        title={listLabel}
-      />
+      {mapOnly || (
+        <List
+          getMarkerId={getMarkerId}
+          highlightedItemId={selectedItemId}
+          items={markers}
+          onItemClick={handleClick}
+          onItemHover={handleHover}
+          renderListItem={renderListItem}
+          title={listLabel}
+        />
+      )}
     </div>
   );
 };
