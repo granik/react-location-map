@@ -1,4 +1,5 @@
 import MapExplorer from "@components/MapExplorer";
+import "./styles/demo.scss";
 
 // Data from JSON file.
 import dataRows from "./assets/air_race_data.json";
@@ -8,8 +9,11 @@ function App() {
     <MapExplorer
       markers={dataRows}
       title="Air Race in Austria"
-      getMarkerId={(m) => m.id}
-      getMarkerCoords={(m) => m.coordinates}
+      getMarkerId={(m) => m?.id}
+      getMarkerCoords={(m) => m?.coordinates}
+      // height={500}
+      // wrapperExtraCssClass="custom"
+      // markerWidth={40}
       renderMarkerPopup={(m) => (
         <>
           <p>
@@ -21,7 +25,7 @@ function App() {
       renderListItem={(m) => (
         <>
           <div className="item-title">{m.title}</div>
-          <div className="item-text">{m.description}</div>
+          {/* <div className="item-text">{m.description}</div> */}
         </>
       )}
     />
