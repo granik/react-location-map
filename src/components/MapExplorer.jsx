@@ -2,26 +2,24 @@ import { useState } from "react";
 import { Map, List } from "@components/content-elements";
 
 const MapExplorer = ({
-  markers,
-  selectedId,
-  defaultSelectedId = null,
-  title,
-  listLabel = null,
-  height = 400,
   defaultCenter = [50.0, 8.0],
+  defaultSelectedId = null,
   defaultZoom = 4,
-  // className,
-  getMarkerId,
   getMarkerCoords,
-  renderListItem,
-  renderMarkerPopup,
+  getMarkerId,
+  listLabel = null,
+  mapHeight = 400,
+  markers,
+  markerWidth = 40,
   onItemClick,
   onItemHover,
+  renderListItem,
+  renderMarkerPopup,
+  title,
+  wrapperExtraCssClass,
 }) => {
   const [hoveredItemId, setHoveredItemId] = useState(null);
-  const [selectedItemId, setSelectedItemId] = useState(
-    selectedId || defaultSelectedId,
-  );
+  const [selectedItemId, setSelectedItemId] = useState(defaultSelectedId);
 
   const handleHover = (event, itemId) => {
     setHoveredItemId(itemId);
@@ -37,35 +35,35 @@ const MapExplorer = ({
   };
 
   return (
-    <div className="container event-explorer">
-      <div className="map" aria-labelledby="map-heading">
-        <Map
-          defaultCenter={defaultCenter}
-          defaultZoom={defaultZoom}
-          title={title}
-          markers={markers}
-          height={height}
-          highlightedMarkerId={hoveredItemId}
-          expandedMarkerId={selectedItemId}
-          onMarkerClick={handleClick}
-          onMarkerHover={handleHover}
-          getMarkerId={getMarkerId}
-          getMarkerCoords={getMarkerCoords}
-          renderMarkerPopup={renderMarkerPopup}
-        />
-      </div>
-
-      <div className="event-list" aria-labelledby="grid-heading">
-        <List
-          title={listLabel}
-          items={markers}
-          highlightedItemId={selectedItemId}
-          onItemHover={handleHover}
-          onItemClick={handleClick}
-          renderListItem={renderListItem}
-          getMarkerId={getMarkerId}
-        />
-      </div>
+    <div
+      className={["event-explorer", wrapperExtraCssClass]
+        .filter((el) => !!el)
+        .join(" ")}
+    >
+      <Map
+        defaultCenter={defaultCenter}
+        defaultZoom={defaultZoom}
+        expandedMarkerId={selectedItemId}
+        getMarkerCoords={(m) => (m !== null ? getMarkerCoords(m) : null)}
+        getMarkerId={getMarkerId}
+        height={mapHeight}
+        highlightedMarkerId={hoveredItemId}
+        markers={markers}
+        markerWidth={markerWidth}
+        onMarkerClick={handleClick}
+        onMarkerHover={handleHover}
+        renderMarkerPopup={renderMarkerPopup}
+        title={title}
+      />
+      <List
+        getMarkerId={getMarkerId}
+        highlightedItemId={selectedItemId}
+        items={markers}
+        onItemClick={handleClick}
+        onItemHover={handleHover}
+        renderListItem={renderListItem}
+        title={listLabel}
+      />
     </div>
   );
 };

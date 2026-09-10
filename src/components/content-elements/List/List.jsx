@@ -5,18 +5,18 @@ import "./list.scss";
 // @todo
 // keyboard tab accecibility
 // h2 -> make configurable
+// layoutType as css mod
 
 const List = ({
-  title,
-  items,
-  highlightedItemId,
-  onItemHover,
-  onItemClick,
   getMarkerId,
+  highlightedItemId,
+  items,
+  onItemClick,
+  onItemHover,
   renderListItem,
+  title,
 }) => (
-  <div className="simple-grid" aria-labelledby="grid-title">
-    <h2 id="grid-title">{title}</h2>
+  <div className="simple-grid" aria-label={title}>
     <ul className="simple-grid-items">
       {items.map((item) => (
         <li key={getMarkerId(item)}>
