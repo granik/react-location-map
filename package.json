@@ -27,7 +27,6 @@
     "react-dom": "^18 || ^19"
   },
   "dependencies": {
-    "classnames": "^2.5.1",
     "pigeon-maps": "^0.22.1"
   },
   "devDependencies": {

@@ -1,10 +1,7 @@
-import classNames from "classnames";
-
 import "./list.scss";
 
 // @todo
 // keyboard tab accecibility
-// h2 -> make configurable
 // layoutType as css mod
 
 const List = ({
@@ -21,9 +18,14 @@ const List = ({
       {items.map((item) => (
         <li key={getMarkerId(item)}>
           <button
-            className={classNames("grid-item", {
-              "grid-item--highlighted": highlightedItemId === getMarkerId(item),
-            })}
+            className={[
+              "grid-item",
+              highlightedItemId === getMarkerId(item)
+                ? "grid-item--highlighted"
+                : null,
+            ]
+              .filter((el) => !!el)
+              .join(" ")}
             onMouseOver={(e) => onItemHover(e, getMarkerId(item))}
             onFocus={(e) => onItemHover(e, getMarkerId(item))}
             onMouseOut={(e) => onItemHover(e, highlightedItemId)}
